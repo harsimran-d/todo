@@ -1,5 +1,5 @@
+import cors from "cors";
 import Express from "express";
-
 const app = Express();
 
 type Todo = {
@@ -10,6 +10,11 @@ type Todo = {
 const ALL_TODOS = new Map<String, Todo>();
 
 app.use(Express.json());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 app.get("/todos", function (_, res) {
   res.json(Object.fromEntries(ALL_TODOS));
